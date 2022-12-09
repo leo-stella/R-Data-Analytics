@@ -1,0 +1,97 @@
+
+```{r}
+# 1. Use the sample of following observations of variable x to find the values below.
+# 10, 2, 15, 6, 4, 9, 12, 11, 3, 0, 12, 10, 9, 7, 11, 10, 8, 5, 10, 6
+
+x <- c(10, 2, 15, 6, 4, 9, 12, 11, 3, 0, 12, 10, 9, 7, 11, 10, 8, 5, 10, 6)
+x = sort(x, decreasing=F)
+
+# length of x
+length(x)
+
+# sum of x
+sum(x)
+
+# mean of x
+mean(x)
+
+# median of x
+median(x)
+
+# mode of x
+# sort(x): by default increasing
+# table(x): create a contingency table that displays the frequency distribution of the variable. 
+# sort(-table(x))
+mode <- row.names(sort(-table(x)))[1]
+mode
+
+# summary of x
+summary(x)
+```
+
+```{r}
+# variance of x
+var(x)
+# Note that this is unbiased sample variance.
+
+# standard deviation of x
+sd(x)
+# Note that this is unbiased sample standard deviation.
+
+# 2. Create a vector y of random normal variables. Let y be of length 10, with the same mean as x, and standard deviation 1
+y <- rnorm(10, mean(x), 1)
+y
+
+# Covariance and correlation between x and y
+cov(x,y)
+# Note that you get error here "Error in cov(x, y) : incompatible dimensions" because x and y are not the same length
+
+# Comment out above line and change y so that it has the same length as x and calculate covariance again
+y <- rnorm(20, mean(x), 1)
+cov(x,y)
+
+# Correlation between x and y
+cor(x,y)
+```
+
+```{r}
+# Create z of random normal variables of length 20, mean 8 and SD 1. (set seed 100 to get same results all the time)
+set.seed(100)
+z <- rnorm(20,8,1)
+
+# Plot the scatter plot of x and z. Add the main label, x-label and z-label.
+plot(z ~ x,
+     main = "Scatter plot of x and z",
+     xlab = "x", ylab = "z")
+# Alternative solution: plot(x,z, main="Scatter plot of x and z", xlab="x", ylab="z")
+```
+
+```{r}
+# Change the SD of z to 10 and obtain a new vector u. 
+set.seed(100)
+u <- rnorm(20,8,10)
+
+# Plot the corresponding x and u. Draw the points onto the same plot as above, and change the color and symbol of the points.
+plot(x,z,
+        main = "Scatter plot of x and z", xlab = "x", ylab= "z",
+        ylim = c(-10,40))
+points(x,u, col = "blue", pch = "+")
+
+# Note that we change y axis limits so that the dots would be on a line
+```
+```{r}
+# Plot vector x in boxplot.
+boxplot(x)
+```
+```{r}
+# Plot vector x and y in boxplot and display the result in one plot. 
+# Add a label under each boxplot, and add some color to each box.
+data <- data.frame(x,y) 
+boxplot(data, col = c("red","yellow"), main = "Boxplot for x and y")
+
+# Alternative solution : 
+# boxplot(x,y, col = c("red","yellow"), names = c("red X", "yellow Y"), main = "Boxplot for x and y")
+```
+
+
+
